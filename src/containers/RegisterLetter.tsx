@@ -1,32 +1,47 @@
 import '../styles/components/registerLetter.css';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useEthers } from '@usedapp/core';
-
+//form
 import Form from 'react-bootstrap/Form';
 import { useForm, useFieldArray } from "react-hook-form";
 import { faTrash , faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useRef, useMemo } from 'react';
 import JoditEditor from 'jodit-react';
+import { useNavigate } from "react-router-dom";
+
+//sc
+import { Inheritance } from '../abis/types';
+import { SC_ADDRESSSES } from '../constants/adresses';
+import useContract from '../utils/useContracts';
+import ABI from '../abis/Inheritance.json';
+import { Contract } from 'ethers';
+
+import { watch } from 'fs';
+import {  getExplorerTransactionLink } from '@usedapp/core';
+import { JsonRpcSigner } from '@ethersproject/providers'; 
+
+
 
 type FormValues = {
     recivers: {
         address: string;
     }[];
     life_period: number;
+    reciversList: string[];
     secret:string;
 };
 
 const RegisterLetter = () => {
 	const editor = useRef(null);
-    const { activateBrowserWallet, account } = useEthers();
     const [textSecret, setTextSecret] = useState<string>("");
     const { register, control, handleSubmit, formState: { errors } } = useForm<FormValues>({
         defaultValues: {
             recivers: [{ address: "" }],
             life_period: 170,
-            secret:""
+            secret:"",
+            reciversList: []
         },
         mode: "onBlur"
       });
@@ -35,13 +50,52 @@ const RegisterLetter = () => {
         control, // control props comes from useForm (optional: if you are using FormContext)
         name: "recivers", // unique name for your Field Array
     });
+    const navigate = useNavigate();
     
-    const onSubmit = async (data:any) => {
+    //contract
+    const contract = useContract<Inheritance>(SC_ADDRESSSES, ABI);
+    const { activateBrowserWallet, account } = useEthers();
+    const {library, chainId} = useEthers();
+    const [txHash, setTxHash] = useState<string | null | undefined>( undefined );
+
+    const [isDisabled, setIsDisabled]= useState<boolean>(false);
+    const mint= async (data: FormValues)=>{
+        const signer: JsonRpcSigner | undefined =  library?.getSigner();
+
+        if (signer){
+            const tx = await contract?.connect(signer).addBriefOwner(
+                ""+account,
+                data.reciversList,
+                data.life_period,
+                "hash"
+            );
+            
+            if (chainId && tx){
+                setIsDisabled(true);
+                const link= getExplorerTransactionLink(tx?.hash, chainId);
+                setTxHash(link);
+            }
+
+            await tx?.wait();
+            setTxHash(undefined);
+            setIsDisabled(false);
+            navigate("/Sucess_transaction");
+        }
+    }
+
+
+    const onSubmit = async (data:FormValues) => {
         console.log("data",data);
         console.log("secret",textSecret);
         data["secret"]=textSecret;
+        var recivers = [];
+        for await (const iterator of data.recivers) {
+            recivers.push(iterator.address);
+        }
+        data.reciversList=recivers;
+        data.life_period=data.life_period*86400;
         console.log("data",data);
-        //await mint(data);
+        mint(data);
     };
 
 
@@ -110,6 +164,14 @@ const RegisterLetter = () => {
                 </Container>
             )
             }
+            <br></br>
+            {isDisabled?
+            <div>
+                upload brief: <a target="_blanck" rel="noreferrer" href={txHash? txHash:""}> {txHash}</a>
+            </div>:
+            <></>}
+            
+
         </div>
     )
 }

@@ -1,0 +1,37 @@
+.sucess-container{
+    width: 80%;
+    height: 60%;
+    position: absolute;
+
+    background: #FFFEFE;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.sucess-container h1{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 140px;
+    line-height: 190px;
+    color: rgba(119, 169, 113, 0.99);
+}
+.sucess-container a{
+    color: rgba(119, 169, 113, 0.99) !important;
+}
+.sucess-container p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 68px;
+    /* identical to box height */
+    color: #0F0E0E;
+}
+
+.sucess-container button{
+    background: rgba(112, 151, 107, 0.99);
+    border: 1px solid rgba(108, 154, 102, 0.99);;
+}
+
+.sucess-container button:hover {
+    background-color:rgba(84, 128, 78, 0.99);;
+}
