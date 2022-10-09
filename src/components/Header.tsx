@@ -6,23 +6,26 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col';
 import WalletButton from '../hooks/WalletButton';
+import { Link } from 'react-router-dom';
 
 export class Header extends Component {
   render() {
     return  <>
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="ligth" variant="ligth">
       <Container>
         <Col md={4} >
-            <Navbar.Brand href="#home">
+        <Link to={"/"}>
+            <Navbar.Brand href="#home" className="navbar-title">
                 <img
                     alt=""
-                    src={process.env.PUBLIC_URL + '/logo.svg'}
+                    src={process.env.PUBLIC_URL + '/logo2.png'}
                     width="30"
                     height="30"
                     className="d-inline-block align-top"
-                />{' '}
-                React Bootstrap
+                />
+                <a>Last Brief</a>
             </Navbar.Brand>
+        </Link>
         </Col>
         <Col md={{ span: 4, offset: 4 }} > 
             <WalletButton></WalletButton>

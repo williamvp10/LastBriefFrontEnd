@@ -1,28 +1,27 @@
 import React, { useEffect, useState }  from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import logo from './logo.svg';
 import '../styles/App.css';
 import { Header } from '../components/Header';
+import Layout from '../components/Layout';
+import Home from './Home';
+import RegisterLetter from './RegisterLetter';
 
 function App() {
 
   return (
-    <div className="App">
-      <Header> </Header>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+      <Layout>
+              <Routes>
+                  <Route path="/" element={<Home/>}/>
+                  <Route path="/Register_letter" element={<RegisterLetter/>}/>
+                  {/*<Route path="/Migration_info" element={<Migration_info/>}/>
+  <Route path="/Migration/:type" element={<Migration/>}/>*/}
+              </Routes>
+      </Layout>
+      </div>
+    </BrowserRouter>
   );
 }
 

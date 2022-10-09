@@ -12,13 +12,13 @@ function ConnectWallet() {
       <div>
         {!account? (
                 <div className="button-sing-in">
-                    <Button variant="danger" 
+                    <Button variant="dark" 
                     onClick={() => activateBrowserWallet()}>
                         Conectar Wallet
                     </Button>
                 </div>
         ):(
-            <p className="text-sing-in"><strong>Conectado:</strong> {account.substr(0,7)}...</p>
+            <p className="text-sing-in"><strong>Connected:</strong> {account.substr(0,7)}...</p>
         )
         }
       </div>
