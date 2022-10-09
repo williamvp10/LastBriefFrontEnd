@@ -14,7 +14,7 @@ function ConnectWallet() {
                 <div className="button-sing-in">
                     <Button variant="dark" 
                     onClick={() => activateBrowserWallet()}>
-                        Conectar Wallet
+                        Connect Wallet
                     </Button>
                 </div>
         ):(

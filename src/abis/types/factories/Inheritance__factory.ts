@@ -135,12 +135,50 @@ const _abi = [
         type: "address",
       },
     ],
+    name: "getHash",
+    outputs: [
+      {
+        internalType: "string",
+        name: "hash",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+    ],
     name: "getHiers",
     outputs: [
       {
         internalType: "address[]",
         name: "",
         type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+    ],
+    name: "getName",
+    outputs: [
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
       },
     ],
     stateMutability: "view",

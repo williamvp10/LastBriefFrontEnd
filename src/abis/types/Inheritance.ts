@@ -32,7 +32,9 @@ export interface InheritanceInterface extends utils.Interface {
     "addBriefOwner(string,address[],uint256,string)": FunctionFragment;
     "checkOwnersStatus()": FunctionFragment;
     "getDiff()": FunctionFragment;
+    "getHash(address)": FunctionFragment;
     "getHiers(address)": FunctionFragment;
+    "getName(address)": FunctionFragment;
     "isOwner(address)": FunctionFragment;
   };
 
@@ -45,7 +47,9 @@ export interface InheritanceInterface extends utils.Interface {
       | "addBriefOwner"
       | "checkOwnersStatus"
       | "getDiff"
+      | "getHash"
       | "getHiers"
+      | "getName"
       | "isOwner"
   ): FunctionFragment;
 
@@ -77,7 +81,15 @@ export interface InheritanceInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "getDiff", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "getHash",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getHiers",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getName",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -104,7 +116,9 @@ export interface InheritanceInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getDiff", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getHash", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getHiers", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getName", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isOwner", data: BytesLike): Result;
 
   events: {};
@@ -174,10 +188,20 @@ export interface Inheritance extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { timeDiff: BigNumber }>;
 
+    getHash(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { hash: string }>;
+
     getHiers(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string[]]>;
+
+    getName(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string] & { name: string }>;
 
     isOwner(
       arg0: PromiseOrValue<string>,
@@ -220,10 +244,20 @@ export interface Inheritance extends BaseContract {
 
   getDiff(overrides?: CallOverrides): Promise<BigNumber>;
 
+  getHash(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   getHiers(
     owner: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string[]>;
+
+  getName(
+    owner: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   isOwner(
     arg0: PromiseOrValue<string>,
@@ -262,10 +296,20 @@ export interface Inheritance extends BaseContract {
 
     getDiff(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getHash(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     getHiers(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string[]>;
+
+    getName(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     isOwner(
       arg0: PromiseOrValue<string>,
@@ -303,7 +347,17 @@ export interface Inheritance extends BaseContract {
 
     getDiff(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getHash(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getHiers(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getName(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -342,7 +396,17 @@ export interface Inheritance extends BaseContract {
 
     getDiff(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    getHash(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getHiers(
+      owner: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getName(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

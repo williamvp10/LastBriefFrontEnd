@@ -1,8 +1,26 @@
 import '../styles/components/Home.css';
+import React, { useState, useEffect } from 'react'; 
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+//sc
+import { Inheritance } from '../abis/types';
+import { SC_ADDRESSSES } from '../constants/adresses';
+import useContract from '../utils/useContracts';
+import ABI from '../abis/Inheritance.json';
+import { Contract } from 'ethers';
+
+import { watch } from 'fs';
+import {  getExplorerTransactionLink } from '@usedapp/core';
+import { JsonRpcSigner } from '@ethersproject/providers'; 
+
 
 const Briefs = () => {
+
+    const contract = useContract<Inheritance>(SC_ADDRESSSES, ABI);
+    const [Heirs, setHeirs]= useState<string[] | null>(
+        null
+    );
+
     return (
         <div className="row mx-0 mt-1">
             <div className="col-md-6 col-sm-12  text-center my-auto p-5" >

@@ -2,6 +2,8 @@ import '../styles/components/registerLetter.css';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Link, Navigate } from 'react-router-dom';
 import { useEthers } from '@usedapp/core';
+//externals
+import sendDataIpfsMoralis from '../utils/sendIPFS';
 //form
 import Form from 'react-bootstrap/Form';
 import { useForm, useFieldArray } from "react-hook-form";
@@ -31,6 +33,7 @@ type FormValues = {
     life_period: number;
     reciversList: string[];
     secret:string;
+    hashIpfs:string;
 };
 
 const RegisterLetter = () => {
@@ -41,6 +44,7 @@ const RegisterLetter = () => {
             recivers: [{ address: "" }],
             life_period: 170,
             secret:"",
+            hashIpfs:"",
             reciversList: []
         },
         mode: "onBlur"
@@ -67,7 +71,7 @@ const RegisterLetter = () => {
                 ""+account,
                 data.reciversList,
                 data.life_period,
-                "hash"
+                "IpfsHash"
             );
             
             if (chainId && tx){
@@ -95,6 +99,10 @@ const RegisterLetter = () => {
         data.reciversList=recivers;
         data.life_period=data.life_period*86400;
         console.log("data",data);
+        //const urlmetadata=await sendDataIpfsMoralis(data.secret);
+        //console.log("m",urlmetadata);
+        //console.log("mo",urlmetadata.body);
+        //data.hashIpfs= urlmetadata[0].path;
         mint(data);
     };
 

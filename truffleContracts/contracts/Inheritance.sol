@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0
 pragma solidity 0.8.17;
 
 //import "@openzeppelin/contracts/access/AccessControl.sol";
@@ -66,6 +65,14 @@ contract Inheritance {
     // gets the Heirs list for a BriefOwner
     function getHiers(address owner) public view returns (address[] memory) {
         return Owners[owner].Heirs;
+    }
+
+    function getHash(address owner) public view returns (string memory hash) {
+        return Owners[owner].BriefIPFSHash;
+    }
+
+    function getName(address owner) public view returns (string memory name) {
+        return Owners[owner].Name;
     }
 
     function getDiff() public view returns (uint256 timeDiff) {
