@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col';
 import WalletButton from '../hooks/WalletButton';
 import { Link } from 'react-router-dom';
+import logo2 from '../styles/images/Logo2.png';
 
 export class Header extends Component {
   render() {
@@ -18,7 +19,7 @@ export class Header extends Component {
             <Navbar.Brand href="#home" className="navbar-title">
                 <img
                     alt=""
-                    src={process.env.PUBLIC_URL + '/logo2.png'}
+                    src={logo2}
                     width="30"
                     height="30"
                     className="d-inline-block align-top"
