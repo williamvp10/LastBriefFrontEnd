@@ -13,7 +13,12 @@ Push Protocol: Push protocol is one of the sponsor solutions that made this happ
 Pocket network: we used a pocket network as a decentralized endpoint provider. We put the URLs of the target networks endpoints and credentials; it was very simple.
 
 
-# contract address Polygon :
+# contract address Polygon:
 
 [0x8007287BcE84e7C1dD092ba31D4E8C5fDB833D33](https://mumbai.polygonscan.com/address/0x8007287BcE84e7C1dD092ba31D4E8C5fDB833D33)
+
+
+## Live Demo
+
+You can access the live application at [https://last-brief-front-end.vercel.app/](https://last-brief-front-end.vercel.app/). For testing purposes, ensure your wallet is connected to the Polygon Mumbai Testnet.
 
